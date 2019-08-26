@@ -1,0 +1,15 @@
+[env.default]
+name = "wrangler-test"
+type = "webpack"
+zone_id = "d0ff429e46e8b24ef2b1ae9ba592067f"
+private = false
+account_id = "e04d3d27a6829775c8ef937145d7f3ec"
+route = "averyharnish.com/wrangler-test"
+
+[env.staging]
+name = "wrangler-test-staging"
+type = "webpack"
+zone_id = "d0ff429e46e8b24ef2b1ae9ba592067f"
+private = false
+account_id = "e04d3d27a6829775c8ef937145d7f3ec"
+route = "staging.averyharnish.com/wrangler-test"

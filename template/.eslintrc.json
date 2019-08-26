@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "standard",
+    "plugin:jest/recommended",
+    "plugin:prettier/recommended",
+    "prettier/standard"
+  ],
+  "plugins": [
+    "standard",
+    "jest"
+  ],
+  "parser": "babel-eslint",
+  "rules": {
+    "max-len": ["warn", { "code": 120 }]
+  }
+}

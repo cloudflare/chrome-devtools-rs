@@ -1,0 +1,6 @@
+pkg/
+target/
+wasm-pack.log
+Cargo.lock
+www/dist/
+www/package-lock.json
