@@ -3,8 +3,13 @@ mod subtype;
 
 use std::fmt;
 
+<<<<<<< HEAD
 pub use object::Object;
 pub use subtype::Subtype;
+=======
+use object::Object;
+use subtype::Subtype;
+>>>>>>> Initial commit
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(untagged)]

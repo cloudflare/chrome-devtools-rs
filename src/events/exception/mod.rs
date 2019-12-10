@@ -2,7 +2,11 @@ mod details;
 
 use std::fmt;
 
+<<<<<<< HEAD
 pub use details::ExceptionDetails;
+=======
+use details::ExceptionDetails;
+>>>>>>> Initial commit
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ExceptionEvent {
