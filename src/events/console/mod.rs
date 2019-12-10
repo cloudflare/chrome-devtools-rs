@@ -1,12 +1,8 @@
 mod primitive;
 
-<<<<<<< HEAD
 pub use primitive::JsPrimitive;
 
 use std::fmt;
-=======
-use primitive::JsPrimitive;
->>>>>>> Initial commit
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ConsoleEvent {
@@ -15,7 +11,6 @@ pub struct ConsoleEvent {
     #[serde(rename = "args")]
     pub messages: Vec<JsPrimitive>,
 }
-<<<<<<< HEAD
 
 impl fmt::Display for ConsoleEvent {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -29,5 +24,3 @@ impl fmt::Display for ConsoleEvent {
         Ok(())
     }
 }
-=======
->>>>>>> Initial commit

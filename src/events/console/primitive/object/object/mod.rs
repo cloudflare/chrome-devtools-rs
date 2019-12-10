@@ -2,11 +2,7 @@ mod properties;
 
 use std::fmt;
 
-<<<<<<< HEAD
 pub use properties::ObjectProperties;
-=======
-use properties::ObjectProperties;
->>>>>>> Initial commit
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Object {

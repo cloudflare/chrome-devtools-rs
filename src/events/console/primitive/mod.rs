@@ -6,7 +6,6 @@ mod object;
 mod string;
 mod symbol;
 
-<<<<<<< HEAD
 pub use bigint::BigIntData;
 pub use boolean::BooleanData;
 pub use function::FunctionData;
@@ -14,15 +13,6 @@ pub use number::NumberData;
 pub use object::ObjectData;
 pub use string::StringData;
 pub use symbol::SymbolData;
-=======
-use bigint::BigIntData;
-use boolean::BooleanData;
-use function::FunctionData;
-use number::NumberData;
-use object::ObjectData;
-use string::StringData;
-use symbol::SymbolData;
->>>>>>> Initial commit
 
 use std::fmt;
 

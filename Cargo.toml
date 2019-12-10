@@ -9,6 +9,7 @@ readme = "README.md"
 [dependencies]
 serde = "1.0.103"
 serde_derive = "1.0.103"
+serde_with = "1.3.1"
 
 [lib]
 name = "chrome_devtools"
