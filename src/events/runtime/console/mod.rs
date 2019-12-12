@@ -1,6 +1,4 @@
-mod primitive;
-
-pub use primitive::JsPrimitive;
+use crate::events::runtime::remote_object::RemoteObject;
 
 use std::fmt;
 
@@ -9,7 +7,7 @@ pub struct ConsoleEvent {
     #[serde(rename = "type")]
     pub log_type: String,
     #[serde(rename = "args")]
-    pub messages: Vec<JsPrimitive>,
+    pub messages: Vec<RemoteObject>,
 }
 
 impl fmt::Display for ConsoleEvent {

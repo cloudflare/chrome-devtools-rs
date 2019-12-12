@@ -1,19 +1,10 @@
-mod properties;
+mod property;
+mod subtype;
 
 use std::fmt;
 
-pub use properties::ObjectProperties;
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Object {
-    pub preview: ObjectPreview,
-}
-
-impl fmt::Display for Object {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", &self.preview)
-    }
-}
+pub use property::ObjectProperty;
+pub use subtype::ObjectSubtype;
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -22,7 +13,8 @@ pub struct ObjectPreview {
     pub object_type: String,
     pub description: String,
     pub overflow: bool,
-    pub properties: Vec<ObjectProperties>,
+    pub subtype: Option<String>,
+    pub properties: Vec<ObjectProperty>,
 }
 
 impl fmt::Display for ObjectPreview {

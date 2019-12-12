@@ -1,8 +1,7 @@
-mod console;
-mod exception;
+pub mod runtime;
 
-pub use console::ConsoleEvent;
-pub use exception::ExceptionEvent;
+pub use runtime::console::ConsoleEvent;
+pub use runtime::exception::ExceptionEvent;
 
 use std::fmt;
 
