@@ -19,12 +19,11 @@ pub struct RemoteObject {
 
 impl RemoteObject {
     fn parse_error(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        log::debug!("{:?}", &self);
         write!(f, "{{unknown ")?;
         if let Some(subtype) = &self.subtype {
-            write!(f, "{:?}", subtype)?;
+            write!(f, "{}", subtype)?;
         } else {
-            write!(f, "{:?}", &self.object_type)?;
+            write!(f, "{}", &self.object_type)?;
         }
         write!(f, "}}")
     }
@@ -46,38 +45,15 @@ impl RemoteObject {
     }
 
     fn display_object(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        if let Some(subtype) = &self.subtype {
-            match subtype {
-                ObjectSubtype::Array => {
-                    if let Some(preview) = &self.preview {
-                        self.display_description(f)?;
-                        write!(f, " [")?;
-                        let last_index = preview.properties.len() - 1;
-                        for (index, property) in &mut preview.properties.iter().enumerate() {
-                            if property.object_type.as_str() == "string" {
-                                if let Some(value) = &property.value {
-                                    write!(f, "\"{}\"", value)?;
-                                } else {
-                                    self.parse_error(f)?;
-                                }
-                            } else {
-                                write!(f, "{}", property)?;
-                            }
-                            if index < last_index {
-                                write!(f, ", ")?;
-                            }
-                        }
-                        write!(f, "]")
-                    } else {
-                        self.parse_error(f)
-                    }
-                }
-                ObjectSubtype::Null => write!(f, "{}", subtype),
-                ObjectSubtype::RegExp | ObjectSubtype::Date => self.display_description(f),
-                _ => write!(f, "{}", subtype),
-            }
-        } else if let Some(preview) = &self.preview {
+        log::info!("displaying object");
+        if let Some(preview) = &self.preview {
             write!(f, "{}", preview)
+        } else if let Some(subtype) = &self.subtype {
+            if subtype.to_string() == "null" {
+                write!(f, "null")
+            } else {
+                self.parse_error(f)
+            }
         } else {
             self.parse_error(f)
         }
@@ -89,7 +65,7 @@ impl fmt::Display for RemoteObject {
         match &self.object_type {
             RemoteObjectType::Undefined => write!(f, "undefined"),
             RemoteObjectType::Boolean | RemoteObjectType::String => self.display_value(f),
-            RemoteObjectType::Null | RemoteObjectType::Object => self.display_object(f),
+            RemoteObjectType::Object => self.display_object(f),
             RemoteObjectType::BigInt
             | RemoteObjectType::Number
             | RemoteObjectType::Symbol
