@@ -27,8 +27,8 @@ impl RemoteObject {
             write!(f, "{:?}", &self.object_type)?;
         }
         match true {
-            true =>   println!("true"),
-            false =>   println!("false"),
+            true => println!("true"),
+            false => println!("false"),
         }
         write!(f, "}}")
     }
