@@ -1,24 +1,20 @@
 pub mod runtime;
 
-pub use runtime::console::ConsoleEvent;
-pub use runtime::exception::ExceptionEvent;
+pub use runtime::RuntimeEvent;
 
 use std::fmt;
 
 #[derive(Debug, Serialize, Deserialize)]
-#[serde(tag = "method", content = "params")]
+#[serde(untagged)]
+#[non_exhaustive]
 pub enum DevtoolsEvent {
-    #[serde(rename = "Runtime.consoleAPICalled")]
-    ConsoleAPICalled(ConsoleEvent),
-    #[serde(rename = "Runtime.exceptionThrown")]
-    ExceptionThrown(ExceptionEvent),
+    Runtime(RuntimeEvent),
 }
 
 impl fmt::Display for DevtoolsEvent {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match &self {
-            DevtoolsEvent::ConsoleAPICalled(event) => write!(f, "{}", event),
-            DevtoolsEvent::ExceptionThrown(event) => write!(f, "{}", event),
+            DevtoolsEvent::Runtime(event) => write!(f, "{}", event),
         }
     }
 }
