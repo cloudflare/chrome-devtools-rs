@@ -1,20 +1,19 @@
 use std::fmt;
 
-pub mod remote_object_type;
+pub mod r#type;
 
-pub use remote_object_type::object::{ObjectPreview, ObjectSubtype};
-pub use remote_object_type::RemoteObjectType;
+use r#type::object::{Preview, Subtype};
+use r#type::Type;
 
 #[derive(Deserialize, Serialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct RemoteObject {
-    #[serde(rename = "type")]
-    pub object_type: RemoteObjectType,
-    pub subtype: Option<ObjectSubtype>,
+    pub r#type: Type,
+    pub subtype: Option<Subtype>,
     pub description: Option<String>,
     pub class_name: Option<String>,
     pub value: Option<serde_json::Value>,
-    pub preview: Option<ObjectPreview>,
+    pub preview: Option<Preview>,
 }
 
 impl RemoteObject {
@@ -23,7 +22,7 @@ impl RemoteObject {
         if let Some(subtype) = &self.subtype {
             write!(f, "{}", subtype)?;
         } else {
-            write!(f, "{}", &self.object_type)?;
+            write!(f, "{}", &self.r#type)?;
         }
         write!(f, "}}")
     }
@@ -45,7 +44,6 @@ impl RemoteObject {
     }
 
     fn display_object(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        log::info!("displaying object");
         if let Some(preview) = &self.preview {
             write!(f, "{}", preview)
         } else if let Some(subtype) = &self.subtype {
@@ -62,14 +60,13 @@ impl RemoteObject {
 
 impl fmt::Display for RemoteObject {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match &self.object_type {
-            RemoteObjectType::Undefined => write!(f, "undefined"),
-            RemoteObjectType::Boolean | RemoteObjectType::String => self.display_value(f),
-            RemoteObjectType::Object => self.display_object(f),
-            RemoteObjectType::BigInt
-            | RemoteObjectType::Number
-            | RemoteObjectType::Symbol
-            | RemoteObjectType::Function => self.display_description(f),
+        match &self.r#type {
+            Type::Undefined => write!(f, "undefined"),
+            Type::Boolean | Type::String => self.display_value(f),
+            Type::Object => self.display_object(f),
+            Type::BigInt | Type::Number | Type::Symbol | Type::Function => {
+                self.display_description(f)
+            }
         }
     }
 }
