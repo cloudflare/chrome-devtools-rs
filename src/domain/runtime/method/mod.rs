@@ -1,3 +1,5 @@
+use serde::{Deserialize, Serialize};
+
 pub mod r#type;
 
 mod get_isolate_id;

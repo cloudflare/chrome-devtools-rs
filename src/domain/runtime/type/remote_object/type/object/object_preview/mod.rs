@@ -1,20 +1,29 @@
-use crate::domain::runtime::r#type::remote_object::r#type::object::{Entry, Property, Subtype};
-use crate::domain::runtime::r#type::remote_object::Type;
-
 use std::fmt;
 
+use serde::{Deserialize, Serialize};
+
+mod subtype;
+
+pub use subtype::Subtype;
+
+use crate::domain::runtime::r#type::remote_object::r#type::object::{
+    EntryPreview, PropertyPreview,
+};
+use crate::domain::runtime::r#type::remote_object::Type;
+
+/// See https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-ObjectPreview
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Preview {
+pub struct ObjectPreview {
     pub r#type: Type,
     pub description: String,
     pub overflow: bool,
     pub subtype: Option<Subtype>,
-    pub properties: Vec<Property>,
-    pub entries: Option<Vec<Entry>>,
+    pub properties: Vec<PropertyPreview>,
+    pub entries: Option<Vec<EntryPreview>>,
 }
 
-impl Preview {
+impl ObjectPreview {
     fn parse_error(&self, f: &mut fmt::Formatter) -> fmt::Result {
         log::debug!("{:?}", &self);
         write!(f, "{{unknown ")?;
@@ -35,7 +44,7 @@ impl Preview {
     }
 }
 
-impl fmt::Display for Preview {
+impl fmt::Display for ObjectPreview {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         if let Some(subtype) = &self.subtype {
             match subtype {

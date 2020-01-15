@@ -1,8 +1,11 @@
+use std::fmt;
+
+use serde::{Deserialize, Serialize};
+
 pub mod console_api_called;
 pub mod exception_thrown;
 
-use std::fmt;
-
+/// Runtime event
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(tag = "method", content = "params")]
 #[non_exhaustive]
