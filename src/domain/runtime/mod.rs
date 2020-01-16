@@ -1,5 +1,5 @@
-mod event;
-mod method;
+pub mod event;
+pub mod method;
 pub mod r#type;
 
 pub use event::Event;

@@ -6,4 +6,4 @@ extern crate serde_json;
 
 pub mod domain;
 
-pub use domain::Domain;
+pub use domain::{runtime, runtime::Runtime, Domain};
