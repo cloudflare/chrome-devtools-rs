@@ -1,3 +1,5 @@
+//! [Runtime events](https://chromedevtools.github.io/devtools-protocol/tot/Runtime)
+
 use serde::{Deserialize, Serialize};
 
 pub mod r#type;

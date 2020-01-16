@@ -2,6 +2,7 @@ use std::fmt;
 
 use serde::{Deserialize, Serialize};
 
+/// See [PropertyPreview](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-PropertyPreview)
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PropertyPreview {

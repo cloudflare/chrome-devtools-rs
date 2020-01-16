@@ -1,3 +1,5 @@
+//![Runtime events](https://chromedevtools.github.io/devtools-protocol/tot/Runtime)
+
 use std::fmt;
 
 use serde::{Deserialize, Serialize};
@@ -5,7 +7,6 @@ use serde::{Deserialize, Serialize};
 pub mod console_api_called;
 pub mod exception_thrown;
 
-/// Runtime event
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(tag = "method", content = "params")]
 #[non_exhaustive]

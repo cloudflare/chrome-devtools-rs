@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::domain::runtime::r#type::remote_object::r#type::object::ObjectPreview;
 
-/// See https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-EntryPreview
+/// See [EntryPreview](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-EntryPreview)
 #[derive(Debug, Serialize, Deserialize)]
 pub struct EntryPreview {
     pub key: ObjectPreview,

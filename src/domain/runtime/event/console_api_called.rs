@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use crate::domain::runtime::r#type::RemoteObject;
 
 /// Issued when console API was called.
-/// See https://chromedevtools.github.io/devtools-protocol/tot/Runtime#event-bindingCalled
+/// See [Runtime.consoleAPICalled](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#event-bindingCalled)
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Event {
     /// Type of the call

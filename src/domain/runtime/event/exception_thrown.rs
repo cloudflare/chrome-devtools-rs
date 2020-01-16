@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use crate::domain::runtime::r#type::ExceptionDetails;
 
 /// Issued when exception was thrown and unhandled.
-/// See https://chromedevtools.github.io/devtools-protocol/tot/Runtime#event-exceptionThrown
+/// See [Runtime.exceptionThrown](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#event-exceptionThrown)
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Event {
