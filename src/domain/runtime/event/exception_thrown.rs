@@ -1,12 +1,16 @@
 use std::fmt;
 
+use serde::{Deserialize, Serialize};
+
 use crate::domain::runtime::r#type::ExceptionDetails;
 
+/// Issued when exception was thrown and unhandled.
+/// See [Runtime.exceptionThrown](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#event-exceptionThrown)
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Event {
     pub exception_details: ExceptionDetails,
-    // pub timestamp: Timestamp,
+    // TODO: pub timestamp: Timestamp,
 }
 
 impl fmt::Display for Event {

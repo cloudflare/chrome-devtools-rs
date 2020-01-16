@@ -1,7 +1,11 @@
-pub mod console_api_called;
-pub mod exception_thrown;
+//![Runtime events](https://chromedevtools.github.io/devtools-protocol/tot/Runtime)
 
 use std::fmt;
+
+use serde::{Deserialize, Serialize};
+
+pub mod console_api_called;
+pub mod exception_thrown;
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(tag = "method", content = "params")]
