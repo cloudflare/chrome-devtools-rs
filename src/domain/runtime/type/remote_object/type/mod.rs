@@ -2,6 +2,9 @@ pub mod object;
 
 use std::fmt;
 
+use serde::{Deserialize, Serialize};
+
+/// Object type.
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Type {

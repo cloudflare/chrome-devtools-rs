@@ -1,9 +1,7 @@
-mod entry;
-mod preview;
-mod property;
-mod subtype;
+mod entry_preview;
+mod object_preview;
+mod property_preview;
 
-pub use entry::Entry;
-pub use preview::Preview;
-pub use property::Property;
-pub use subtype::Subtype;
+pub use entry_preview::EntryPreview;
+pub use object_preview::{ObjectPreview, Subtype};
+pub use property_preview::PropertyPreview;

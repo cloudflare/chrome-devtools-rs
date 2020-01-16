@@ -1,11 +1,18 @@
-use crate::domain::runtime::r#type::RemoteObject;
-
 use std::fmt;
 
+use serde::{Deserialize, Serialize};
+
+use crate::domain::runtime::r#type::RemoteObject;
+
+/// Issued when console API was called.
+/// See [Runtime.consoleAPICalled](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#event-bindingCalled)
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Event {
-    pub r#type: String,
+    /// Type of the call
+    pub r#type: String, // TODO: make this an enum
+    /// Call arguments
     pub args: Vec<RemoteObject>,
+    // TODO: Add other parameters
 }
 
 impl fmt::Display for Event {

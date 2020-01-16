@@ -2,9 +2,14 @@ use std::fmt;
 
 pub mod r#type;
 
-use r#type::object::{Preview, Subtype};
+use r#type::object::{ObjectPreview, Subtype};
 use r#type::Type;
 
+use serde::{Deserialize, Serialize};
+use serde_json;
+
+/// Mirror object referencing original JavaScript object.
+/// See [RemoteObject](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-RemoteObject)
 #[derive(Deserialize, Serialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct RemoteObject {
@@ -13,7 +18,7 @@ pub struct RemoteObject {
     pub description: Option<String>,
     pub class_name: Option<String>,
     pub value: Option<serde_json::Value>,
-    pub preview: Option<Preview>,
+    pub preview: Option<ObjectPreview>,
 }
 
 impl RemoteObject {
