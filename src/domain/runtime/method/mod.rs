@@ -13,7 +13,7 @@ use std::fmt;
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(tag = "method")]
 #[non_exhaustive]
-pub enum MethodSend {
+pub enum SendMethod {
     #[serde(rename = "Runtime.enable")]
     Enable(SendId),
     #[serde(rename = "Runtime.disable")]
@@ -22,7 +22,7 @@ pub enum MethodSend {
     GetIsolateId(SendId),
 }
 
-impl fmt::Display for MethodSend {
+impl fmt::Display for SendMethod {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{:?}", &self)
     }
@@ -31,7 +31,7 @@ impl fmt::Display for MethodSend {
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(tag = "method")]
 #[non_exhaustive]
-pub enum MethodReturn {
+pub enum ReturnMethod {
     #[serde(rename = "Runtime.enable")]
     Enable(Id),
     #[serde(rename = "Runtime.disable")]

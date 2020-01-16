@@ -3,7 +3,7 @@ pub mod method;
 pub mod r#type;
 
 pub use event::Event;
-pub use method::{MethodReturn, MethodSend};
+pub use method::{ReturnMethod, SendMethod};
 
 use serde::{Deserialize, Serialize};
 
@@ -13,5 +13,5 @@ use serde::{Deserialize, Serialize};
 #[serde(untagged)]
 pub enum Runtime {
     Event(Event),
-    Method(MethodReturn),
+    Method(ReturnMethod),
 }
