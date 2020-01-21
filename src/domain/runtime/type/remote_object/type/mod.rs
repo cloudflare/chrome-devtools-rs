@@ -2,9 +2,12 @@ pub mod object;
 
 use std::fmt;
 
+use serde::{Deserialize, Serialize};
+
+/// Object type.
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
-pub enum RemoteObjectType {
+pub enum Type {
     Object,
     Number,
     BigInt,
@@ -15,9 +18,9 @@ pub enum RemoteObjectType {
     Function,
 }
 
-impl fmt::Display for RemoteObjectType {
+impl fmt::Display for Type {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let object_type = format!("{:?}", &self);
-        write!(f, "{}", object_type.to_lowercase())
+        let r#type = format!("{:?}", &self);
+        write!(f, "{}", r#type.to_lowercase())
     }
 }

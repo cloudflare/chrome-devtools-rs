@@ -1,25 +1,26 @@
-pub mod entry;
-pub mod property;
-pub mod subtype;
-
 use std::fmt;
 
-pub use entry::ObjectEntry;
-pub use property::ObjectProperty;
-pub use subtype::ObjectSubtype;
+use serde::{Deserialize, Serialize};
 
-use super::RemoteObjectType;
+mod subtype;
 
+pub use subtype::Subtype;
+
+use crate::domain::runtime::r#type::remote_object::r#type::object::{
+    EntryPreview, PropertyPreview,
+};
+use crate::domain::runtime::r#type::remote_object::Type;
+
+/// See [ObjectPreview](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-ObjectPreview)
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ObjectPreview {
-    #[serde(rename = "type")]
-    pub object_type: RemoteObjectType,
+    pub r#type: Type,
     pub description: String,
     pub overflow: bool,
-    pub subtype: Option<ObjectSubtype>,
-    pub properties: Vec<ObjectProperty>,
-    pub entries: Option<Vec<ObjectEntry>>,
+    pub subtype: Option<Subtype>,
+    pub properties: Vec<PropertyPreview>,
+    pub entries: Option<Vec<EntryPreview>>,
 }
 
 impl ObjectPreview {
@@ -29,7 +30,7 @@ impl ObjectPreview {
         if let Some(subtype) = &self.subtype {
             write!(f, "{}", subtype)?;
         } else {
-            write!(f, "{}", &self.object_type)?;
+            write!(f, "{}", &self.r#type)?;
         }
         write!(f, "}}")
     }
@@ -47,7 +48,7 @@ impl fmt::Display for ObjectPreview {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         if let Some(subtype) = &self.subtype {
             match subtype {
-                ObjectSubtype::Array => {
+                Subtype::Array => {
                     write!(f, " [")?;
                     let last_index = self.properties.len() - 1;
                     for (index, property) in &mut self.properties.iter().enumerate() {
@@ -67,7 +68,7 @@ impl fmt::Display for ObjectPreview {
                     self.write_overflow(f)?;
                     write!(f, "]")
                 }
-                ObjectSubtype::Map => {
+                Subtype::Map => {
                     if let Some(entries) = &self.entries {
                         write!(f, "{{")?;
                         let last_index = entries.len() - 1;
@@ -83,12 +84,12 @@ impl fmt::Display for ObjectPreview {
                         self.parse_error(f)
                     }
                 }
-                ObjectSubtype::RegExp | ObjectSubtype::Date => write!(f, "{}", &self.description),
+                Subtype::RegExp | Subtype::Date => write!(f, "{}", &self.description),
                 _ => write!(f, "{}", subtype),
             }
         } else {
-            match &self.object_type {
-                RemoteObjectType::Object => {
+            match &self.r#type {
+                r#Type::Object => {
                     write!(f, "{{")?;
                     let last_index = self.properties.len() - 1;
                     for (idx, property) in &mut self.properties.iter().enumerate() {
@@ -100,7 +101,7 @@ impl fmt::Display for ObjectPreview {
                     self.write_overflow(f)?;
                     write!(f, "}}")
                 }
-                RemoteObjectType::String => write!(f, "\"{}\"", &self.description),
+                r#Type::String => write!(f, "\"{}\"", &self.description),
                 _ => write!(f, "{}", &self.description),
             }
         }
