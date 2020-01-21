@@ -49,18 +49,10 @@ impl fmt::Display for ObjectPreview {
         if let Some(subtype) = &self.subtype {
             match subtype {
                 Subtype::Array => {
-                    write!(f, " [")?;
+                    write!(f, "[")?;
                     let last_index = self.properties.len() - 1;
                     for (index, property) in &mut self.properties.iter().enumerate() {
-                        if property.object_type.as_str() == "string" {
-                            if let Some(value) = &property.value {
-                                write!(f, "\"{}\"", value)?;
-                            } else {
-                                self.parse_error(f)?;
-                            }
-                        } else {
-                            write!(f, "{}", property)?;
-                        }
+                        write!(f, "{}", property.get_value())?;
                         if index < last_index {
                             write!(f, ", ")?;
                         }
@@ -89,7 +81,7 @@ impl fmt::Display for ObjectPreview {
             }
         } else {
             match &self.r#type {
-                r#Type::Object => {
+                Type::Object => {
                     write!(f, "{{")?;
                     let last_index = self.properties.len() - 1;
                     for (idx, property) in &mut self.properties.iter().enumerate() {
@@ -101,7 +93,7 @@ impl fmt::Display for ObjectPreview {
                     self.write_overflow(f)?;
                     write!(f, "}}")
                 }
-                r#Type::String => write!(f, "\"{}\"", &self.description),
+                Type::String => write!(f, "\"{}\"", &self.description),
                 _ => write!(f, "{}", &self.description),
             }
         }
