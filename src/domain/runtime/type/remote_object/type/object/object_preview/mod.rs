@@ -49,7 +49,7 @@ impl fmt::Display for ObjectPreview {
         if let Some(subtype) = &self.subtype {
             match subtype {
                 Subtype::Array => {
-                    write!(f, "[")?;
+                    write!(f, "[ ")?;
                     let last_index = self.properties.len() - 1;
                     for (index, property) in &mut self.properties.iter().enumerate() {
                         write!(f, "{}", property.get_value())?;
@@ -58,11 +58,11 @@ impl fmt::Display for ObjectPreview {
                         }
                     }
                     self.write_overflow(f)?;
-                    write!(f, "]")
+                    write!(f, " ]")
                 }
                 Subtype::Map => {
                     if let Some(entries) = &self.entries {
-                        write!(f, "{{")?;
+                        write!(f, "{{ ")?;
                         let last_index = entries.len() - 1;
                         for (index, entry) in &mut entries.iter().enumerate() {
                             write!(f, "{}", entry)?;
@@ -71,7 +71,7 @@ impl fmt::Display for ObjectPreview {
                             }
                         }
                         self.write_overflow(f)?;
-                        write!(f, "}}")
+                        write!(f, " }}")
                     } else {
                         self.parse_error(f)
                     }
@@ -82,7 +82,7 @@ impl fmt::Display for ObjectPreview {
         } else {
             match &self.r#type {
                 Type::Object => {
-                    write!(f, "{{")?;
+                    write!(f, "{{ ")?;
                     let last_index = self.properties.len() - 1;
                     for (idx, property) in &mut self.properties.iter().enumerate() {
                         write!(f, "{}", property)?;
@@ -91,7 +91,7 @@ impl fmt::Display for ObjectPreview {
                         }
                     }
                     self.write_overflow(f)?;
-                    write!(f, "}}")
+                    write!(f, " }}")
                 }
                 Type::String => write!(f, "\"{}\"", &self.description),
                 _ => write!(f, "{}", &self.description),
