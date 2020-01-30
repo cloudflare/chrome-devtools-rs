@@ -8,6 +8,8 @@ use r#type::Type;
 use serde::{Deserialize, Serialize};
 use serde_json;
 
+use console::style;
+
 /// Mirror object referencing original JavaScript object.
 /// See [RemoteObject](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-RemoteObject)
 #[derive(Deserialize, Serialize, Debug)]
@@ -22,56 +24,92 @@ pub struct RemoteObject {
 }
 
 impl RemoteObject {
-    fn parse_error(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{{unknown ")?;
-        if let Some(subtype) = &self.subtype {
-            write!(f, "{}", subtype)?;
+    fn parse_error(&self) -> String {
+        let e = if let Some(subtype) = &self.subtype {
+            format!("{}", subtype)
         } else {
-            write!(f, "{}", &self.r#type)?;
-        }
-        write!(f, "}}")
+            format!("{}", &self.r#type)
+        };
+        format!("{{unknown {}}}", e)
     }
 
-    fn display_description(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    fn display_description(&self) -> String {
         if let Some(description) = &self.description {
-            write!(f, "{}", description)
+            description.to_string()
         } else {
-            self.parse_error(f)
+            self.parse_error()
         }
     }
 
-    fn display_value(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    fn display_value(&self) -> String {
         if let Some(value) = &self.value {
-            write!(f, "{}", value)
+            value.to_string()
         } else {
-            self.parse_error(f)
+            self.parse_error()
         }
     }
 
-    fn display_object(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    fn display_object(&self) -> String {
         if let Some(preview) = &self.preview {
-            write!(f, "{}", preview)
+            preview.to_string()
         } else if let Some(subtype) = &self.subtype {
             if subtype.to_string() == "null" {
-                write!(f, "null")
+                let mut null = "null".to_string();
+                if cfg!(feature = "color") {
+                    null = format!("{}", style(null).bold());
+                }
+                null
             } else {
-                self.parse_error(f)
+                self.parse_error()
             }
         } else {
-            self.parse_error(f)
+            self.parse_error()
         }
     }
 }
 
 impl fmt::Display for RemoteObject {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match &self.r#type {
-            Type::Undefined => write!(f, "undefined"),
-            Type::Boolean | Type::String => self.display_value(f),
-            Type::Object => self.display_object(f),
-            Type::BigInt | Type::Number | Type::Symbol | Type::Function => {
-                self.display_description(f)
+        let formatted = match &self.r#type {
+            Type::Undefined => {
+                let mut disp = "undefined".to_string();
+                if cfg!(feature = "color") {
+                    disp = format!("{}", style(disp).dim())
+                }
+                disp
             }
-        }
+            Type::Boolean => {
+                let mut disp = self.display_value();
+                if cfg!(feature = "color") {
+                    disp = format!("{}", style(disp).yellow());
+                }
+                disp
+            }
+            Type::String => {
+                if let Some(value) = &self.value {
+                    let value = value.to_string();
+                    let end = value.len() - 1;
+                    value[1..end].to_string()
+                } else {
+                    self.parse_error()
+                }
+            }
+            Type::Object => self.display_object(),
+            Type::BigInt | Type::Number | Type::Symbol => {
+                let mut disp = self.display_description();
+                if cfg!(feature = "color") {
+                    disp = format!("{}", style(disp).yellow());
+                }
+                disp
+            }
+            Type::Function => {
+                let mut disp = self.display_description();
+                if cfg!(feature = "color") {
+                    disp = format!("{}", style(disp).cyan());
+                }
+                disp
+            }
+        };
+        write!(f, "{}", formatted)
     }
 }
