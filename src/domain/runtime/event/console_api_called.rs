@@ -21,7 +21,7 @@ impl fmt::Display for Event {
         for (index, arg) in self.args.iter().enumerate() {
             write!(f, "{}", arg)?;
             if index < last_index {
-                write!(f, ", ")?;
+                write!(f, " ")?;
             }
         }
         Ok(())

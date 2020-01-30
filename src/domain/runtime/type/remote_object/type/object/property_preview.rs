@@ -1,5 +1,6 @@
 use std::fmt;
 
+use console::style;
 use serde::{Deserialize, Serialize};
 
 use crate::runtime::r#type::remote_object::r#type::object::object_preview::{
@@ -23,22 +24,60 @@ impl PropertyPreview {
     pub fn get_value(&self) -> String {
         if let Some(value) = &self.value {
             match &self.r#type {
-                Type::Undefined => "undefined".to_string(),
-                Type::String => format!("'{}'", value),
+                Type::Undefined => {
+                    let mut value = "undefined".to_string();
+                    if cfg!(feature = "color") {
+                        value = format!("{}", style(value).dim());
+                    }
+                    value
+                }
+                Type::String => {
+                    let mut value = format!("'{}'", value);
+                    if cfg!(feature = "color") {
+                        value = format!("{}", style(value).green());
+                    }
+                    value
+                }
                 Type::Object => {
                     let r#type = if let Some(subtype) = &self.subtype {
                         format!("{:?}", subtype)
                     } else {
                         "Object".to_string()
                     };
-                    format!("[object {}]", r#type)
+                    let mut value = format!("[{}]", r#type);
+                    if cfg!(feature = "color") {
+                        value = format!("{}", style(value).cyan())
+                    }
+                    value
                 }
-                Type::BigInt | Type::Number | Type::Symbol | Type::Function | Type::Boolean => {
-                    value.to_string()
+                Type::BigInt | Type::Number | Type::Boolean => {
+                    if cfg!(feature = "color") {
+                        format!("{}", style(value).yellow())
+                    } else {
+                        value.to_string()
+                    }
+                }
+                Type::Symbol => {
+                    if cfg!(feature = "color") {
+                        format!("{}", style(value).green())
+                    } else {
+                        value.to_string()
+                    }
+                }
+                Type::Function => {
+                    if cfg!(feature = "color") {
+                        format!("{}", style(value).cyan())
+                    } else {
+                        value.to_string()
+                    }
                 }
             }
         } else {
-            format!("[{} {}]", &self.r#type, &self.name)
+            let mut disp = format!("[{} {}]", &self.r#type, &self.name);
+            if cfg!(feature = "color") {
+                disp = format!("{}", style(disp).cyan());
+            }
+            disp
         }
     }
 }

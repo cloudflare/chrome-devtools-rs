@@ -1,5 +1,6 @@
 use std::fmt;
 
+use console::style;
 use serde::{Deserialize, Serialize};
 
 use crate::domain::runtime::r#type::ExceptionDetails;
@@ -15,10 +16,13 @@ pub struct Event {
 
 impl fmt::Display for Event {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", &self.exception_details.text)?;
+        let mut disp = self.exception_details.text.to_string();
         if let Some(description) = &self.exception_details.exception.description {
-            write!(f, "\n{}", description)?;
+            disp = format!("{}\n{}", disp, description);
         };
-        Ok(())
+        if cfg!(feature = "color") {
+            disp = format!("{}", style(disp).red())
+        }
+        write!(f, "{}", disp)
     }
 }
