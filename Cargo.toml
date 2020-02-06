@@ -5,6 +5,8 @@ authors = ["Avery Harnish <averyharnish@gmail.com>"]
 edition = "2018"
 license = "MIT"
 readme = "README.md"
+description = "Low-level library for interacting with the Chrome Devtools Protocol"
+repository = "https://github.com/EverlastingBugstopper/chrome-devtools-rs"
 
 [features]
 color = []
