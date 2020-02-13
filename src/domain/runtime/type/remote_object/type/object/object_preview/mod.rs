@@ -102,7 +102,13 @@ impl fmt::Display for ObjectPreview {
                     }
                     format!("{{{}}}", object)
                 }
-                Type::String => format!("'{}'", style(&self.description).green()),
+                Type::String => {
+                    if cfg!(feature = "color") {
+                        format!("'{}'", style(&self.description).green())
+                    } else {
+                        format!("'{}'", &self.description)
+                    }
+                }
                 _ => self.description.to_string(),
             }
         };
