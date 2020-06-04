@@ -6,7 +6,6 @@ use r#type::object::{ObjectPreview, Subtype};
 use r#type::Type;
 
 use serde::{Deserialize, Serialize};
-use serde_json;
 
 use console::style;
 
@@ -109,6 +108,7 @@ impl fmt::Display for RemoteObject {
                 }
                 disp
             }
+            Type::Accessor => self.display_object(),
         };
         write!(f, "{}", formatted)
     }

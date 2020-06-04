@@ -16,6 +16,7 @@ pub enum Type {
     Symbol,
     Undefined,
     Function,
+    Accessor,
 }
 
 impl fmt::Display for Type {
