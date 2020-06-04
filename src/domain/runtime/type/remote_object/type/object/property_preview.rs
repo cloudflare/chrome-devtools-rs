@@ -73,13 +73,13 @@ impl PropertyPreview {
                 }
                 Type::Accessor => {
                     let r#type = if let Some(subtype) = &self.subtype {
-                        format!("ttt{:?}", subtype)
+                        format!("{:?}", subtype)
                     } else {
                         "Object".to_string()
                     };
                     let mut value = format!("[{}]", r#type);
                     if cfg!(feature = "color") {
-                        value = format!("tpt{}", style(value).cyan())
+                        value = format!("tpt{}", style(value).red())
                     }
                     value
                 }
