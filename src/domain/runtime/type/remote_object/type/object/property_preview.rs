@@ -79,7 +79,7 @@ impl PropertyPreview {
                     };
                     let mut value = format!("[{}]", r#type);
                     if cfg!(feature = "color") {
-                        value = format!("tpt{}", style(value).red())
+                        value = format!("{}", style(value).red())
                     }
                     value
                 }
