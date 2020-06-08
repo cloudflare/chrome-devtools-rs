@@ -38,12 +38,15 @@
 
 - **Updated dependencies - [EverlastingBugstopper], [pull/41]**
 
-  [EverlastingBugstopper]: https://github.com/EverlastingBugstopper [pull/41]:
+  [EverlastingBugstopper]: https://github.com/EverlastingBugstopper
+  [pull/41]:
   https://github.com/EverlastingBugstopper/chrome-devtools-rs/pull/41
 
 ## 💩 0.0.0-alpha.0
 
-- **First release - [EverlastingBugstopper], [issue/Issue #][pull/pr #]**
+- **First release - [EverlastingBugstopper]**
 
   First release of this crate only contains functionality for deserializing and
   displaying calls to console.log.
+
+  [EverlastingBugstopper]: https://github.com/EverlastingBugstopper
