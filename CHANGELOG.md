@@ -10,8 +10,8 @@
   containing strings. In order to display these properly, we now unescape those
   sequences, resulting in much better looking output in the terminal.
 
-  [jspspike]: https://github.com/jspspike [pull/40]:
-  https://github.com/EverlastingBugstopper/chrome-devtools-rs/pull/40
+  [jspspike]: https://github.com/jspspike
+  [pull/40]: https://github.com/EverlastingBugstopper/chrome-devtools-rs/pull/40
 
 ### 👏 Fixes
 
@@ -21,8 +21,8 @@
   meant certain console calls would fail to deserialize. Now `RemoteObject` can
   parse messages with `accessor`!
 
-  [jspspike]: https://github.com/jspspike [pull/38]:
-  https://github.com/EverlastingBugstopper/chrome-devtools-rs/pull/38
+  [jspspike]: https://github.com/jspspike
+  [pull/38]: https://github.com/EverlastingBugstopper/chrome-devtools-rs/pull/38
 
 - **Don't color strings if color feature is not enabled -
   [EverlastingBugstopper], [pull/36]**
@@ -31,16 +31,15 @@
   console.log calls with color. Before, it would do this even if you didn't pass
   the `color` feature, now the feature flag works as intended.
 
-  [EverlastingBugstopper]: https://github.com/EverlastingBugstopper [pull/36]:
-  https://github.com/EverlastingBugstopper/chrome-devtools-rs/pull/36
+  [EverlastingBugstopper]: https://github.com/EverlastingBugstopper
+  [pull/36]: https://github.com/EverlastingBugstopper/chrome-devtools-rs/pull/36
 
 ### 🔨 Maintenance
 
 - **Updated dependencies - [EverlastingBugstopper], [pull/41]**
 
   [EverlastingBugstopper]: https://github.com/EverlastingBugstopper
-  [pull/41]:
-  https://github.com/EverlastingBugstopper/chrome-devtools-rs/pull/41
+  [pull/41]: https://github.com/EverlastingBugstopper/chrome-devtools-rs/pull/41
 
 ## 💩 0.0.0-alpha.0
 
