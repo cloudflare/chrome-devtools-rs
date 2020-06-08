@@ -6,6 +6,7 @@ use r#type::object::{ObjectPreview, Subtype};
 use r#type::Type;
 
 use serde::{Deserialize, Serialize};
+use snailquote::unescape;
 
 use console::style;
 
@@ -88,7 +89,12 @@ impl fmt::Display for RemoteObject {
                 if let Some(value) = &self.value {
                     let value = value.to_string();
                     let end = value.len() - 1;
-                    value[1..end].to_string().replace("\\\"", "\"")
+
+                    if let Ok(s) = unescape(&value[1..end]) {
+                        s
+                    } else {
+                        self.parse_error()
+                    }
                 } else {
                     self.parse_error()
                 }
