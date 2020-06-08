@@ -12,7 +12,7 @@ This is a list of the things that need to happen during a release.
 1. Go through the commit history since the last release. Ensure that all PRs
    that have landed are marked with the milestone. You can use this to
    show all the PRs that are merged on or after YYY-MM-DD:
-   `https://github.com/issues?utf8=%E2%9C%93&q=repo%3Acloudflare%2Fwrangler+merged%3A%3E%3DYYYY-MM-DD`
+   `https://github.com/issues?utf8=%E2%9C%93&q=repo%3AEverlastingBugstopper%2Fchrome-devtools-rs+merged%3A%3E%3DYYYY-MM-DD`
 1. Go through the closed PRs in the milestone. Each should have a changelog
    label indicating if the change is docs, fix, feature, or maintenance. If
    there is a missing label, please add one.
