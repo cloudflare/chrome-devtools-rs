@@ -20,11 +20,12 @@ impl fmt::Display for Event {
 
         let line_number = self.exception_details.line_number;
         let column_number = self.exception_details.column_number;
+        let url = self.exception_details.url.to_owned();
 
         if let Some(description) = &self.exception_details.exception.description {
             disp = format!(
-                "{}\n{}\nat line: {} column: {}",
-                disp, description, line_number, column_number
+                "{}\n{}\nat line: {} column: {} in {}",
+                disp, description, line_number, column_number, url
             );
         };
         if cfg!(feature = "color") {
