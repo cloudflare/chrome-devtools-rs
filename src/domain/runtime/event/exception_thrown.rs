@@ -17,15 +17,8 @@ pub struct Event {
 impl fmt::Display for Event {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let mut disp = self.exception_details.text.to_string();
-
-        let line_number = self.exception_details.line_number;
-        let column_number = self.exception_details.column_number;
-
         if let Some(description) = &self.exception_details.exception.description {
-            disp = format!(
-                "{}\n{}\nat line: {} column: {}",
-                disp, description, line_number, column_number
-            );
+            disp = format!("{}\n{}", disp, description);
         };
         if cfg!(feature = "color") {
             disp = format!("{}", style(disp).red())
