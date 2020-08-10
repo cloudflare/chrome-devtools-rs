@@ -9,7 +9,6 @@ pub struct ExceptionDetails {
     pub exception: Exception,
     pub line_number: usize,
     pub column_number: usize,
-    pub url: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
