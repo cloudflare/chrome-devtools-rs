@@ -1,5 +1,14 @@
 # Changelog
 
+## 👽 0.0.0-alpha.2
+
+### 🔌 Features
+
+- **Line numbers for exception thrown - [nataliescottdavidson], [pull/48]**
+
+  [jspspike]: https://github.com/nataliescottdavidson
+  [pull/48]: https://github.com/cloudflare/chrome-devtools-rs/pull/48
+
 ## 🌈 0.0.0-alpha.1
 
 ### 🔌 Features
