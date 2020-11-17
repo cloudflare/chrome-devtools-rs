@@ -1,7 +1,7 @@
 [package]
 name = "chrome-devtools-rs"
-version = "0.0.0-alpha.1"
-authors = ["Avery Harnish <averyharnish@gmail.com>"]
+version = "0.0.0-alpha.2"
+authors = ["Avery Harnish <averyharnish@gmail.com>", "Nat Davidson <davidsonnatalies@gmail.com>"]
 edition = "2018"
 license = "MIT"
 readme = "README.md"
