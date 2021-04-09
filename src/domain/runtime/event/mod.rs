@@ -19,7 +19,7 @@ pub enum Event {
 #[non_exhaustive]
 #[serde(rename_all = "camelCase")]
 pub struct ExceptionParams {
-    pub timestamp: i32,
+    pub timestamp: i64,
     pub exception_details: ExceptionDetails,
 }
 
