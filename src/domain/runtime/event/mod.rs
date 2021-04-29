@@ -1,6 +1,7 @@
 //![Runtime events](https://chromedevtools.github.io/devtools-protocol/tot/Runtime)
 
 use crate::domain::runtime::r#type::RemoteObject;
+use crate::domain::runtime::r#type::StackTrace;
 use serde::{Deserialize, Serialize};
 use std::fmt;
 pub mod console_api_called;
@@ -26,11 +27,13 @@ pub struct ExceptionParams {
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ExceptionDetails {
+    pub exception_id: i32,
     pub text: String,
     pub line_number: i32,
     pub column_number: i32,
     pub url: Option<String>,
-    pub exception: RemoteObject,
+    pub exception: RemoteObject, // optional in spec
+    pub stack_trace: StackTrace, // ditto
 }
 
 impl fmt::Display for Event {
