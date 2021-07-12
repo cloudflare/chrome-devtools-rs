@@ -6,7 +6,7 @@ use crate::domain::runtime::r#type::RemoteObject;
 
 /// Issued when console API was called.
 /// See [Runtime.consoleAPICalled](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#event-bindingCalled)
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Event {
     /// Type of the call
     pub r#type: String, // TODO: make this an enum

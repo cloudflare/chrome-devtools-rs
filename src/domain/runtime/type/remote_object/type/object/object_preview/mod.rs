@@ -13,7 +13,7 @@ use crate::domain::runtime::r#type::remote_object::r#type::object::{
 use crate::domain::runtime::r#type::remote_object::Type;
 
 /// See [ObjectPreview](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-ObjectPreview)
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct ObjectPreview {
     pub r#type: Type,
