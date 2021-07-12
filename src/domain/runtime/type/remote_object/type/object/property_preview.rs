@@ -9,7 +9,7 @@ use crate::runtime::r#type::remote_object::r#type::object::object_preview::{
 use crate::runtime::r#type::remote_object::r#type::Type;
 
 /// See [PropertyPreview](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-PropertyPreview)
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct PropertyPreview {
     pub name: String,

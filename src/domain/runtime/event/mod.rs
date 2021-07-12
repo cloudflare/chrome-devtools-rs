@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use std::fmt;
 pub mod console_api_called;
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 #[non_exhaustive]
 #[serde(tag = "method", content = "params")]
 pub enum Event {
@@ -15,7 +15,7 @@ pub enum Event {
     ExceptionThrown(ExceptionParams),
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 #[non_exhaustive]
 #[serde(rename_all = "camelCase")]
 pub struct ExceptionParams {
@@ -23,7 +23,7 @@ pub struct ExceptionParams {
     pub exception_details: ExceptionDetails,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct ExceptionDetails {
     pub text: String,

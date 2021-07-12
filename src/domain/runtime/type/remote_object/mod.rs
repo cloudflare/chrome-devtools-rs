@@ -12,7 +12,7 @@ use console::style;
 
 /// Mirror object referencing original JavaScript object.
 /// See [RemoteObject](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-RemoteObject)
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct RemoteObject {
     pub r#type: Type,
