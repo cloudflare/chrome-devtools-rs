@@ -11,7 +11,7 @@ This is a list of the things that need to happen during a release.
 1. Go through the commit history since the last release. Ensure that all PRs
    that have landed are marked with the milestone. You can use this to show all
    the PRs that are merged on or after YYY-MM-DD:
-   `https://github.com/issues?utf8=%E2%9C%93&q=repo%3AEverlastingBugstopper%2Fchrome-devtools-rs+merged%3A%3E%3DYYYY-MM-DD`
+   `https://github.com/issues?utf8=%E2%9C%93&q=repo%3Acloudflare%2Fchrome-devtools-rs+merged%3A%3E%3DYYYY-MM-DD`
 1. Go through the closed PRs in the milestone. Each should have a changelog
    label indicating if the change is docs, fix, feature, or maintenance. If
    there is a missing label, please add one.
@@ -19,7 +19,7 @@ This is a list of the things that need to happen during a release.
    that's been included in the release (point releases can be a little weirder).
 1. Add this release to the `CHANGELOG.md`. Use the structure of previous
    entries. If you use VS Code, you can use
-   [this snippet](https://gist.github.com/EverlastingBugstopper/9feaf56b3dfe2a2c4ad156db36f2f75a)
+   [this snippet](https://gist.github.com/cloudflare/9feaf56b3dfe2a2c4ad156db36f2f75a)
    to insert new changelog sections. If it is a release candidate, no official
    changelog is needed, but testing instructions will be added later in the
    process.
