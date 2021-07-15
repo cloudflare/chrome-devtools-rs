@@ -1,12 +1,21 @@
 # Changelog
 
+## ↔️ 0.0.0-alpha.3
+
+### 🔌 Fixes
+
+- **Made RemoteObject derive Clone and increased size of timestamp in RemoteObject - [jspspike], [pull/51]**
+    
+  [jspspike]: https://github.com/jspspike
+  [pull/40]: https://github.com/cloudflare/chrome-devtools-rs/pull/51
+
 ## 👽 0.0.0-alpha.2
 
 ### 🔌 Features
 
 - **Line numbers for exception thrown - [nataliescottdavidson], [pull/48]**
 
-  [jspspike]: https://github.com/nataliescottdavidson
+  [nataliescottdavidson]: https://github.com/nataliescottdavidson
   [pull/48]: https://github.com/cloudflare/chrome-devtools-rs/pull/48
 
 ## 🌈 0.0.0-alpha.1
