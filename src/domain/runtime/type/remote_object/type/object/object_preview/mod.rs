@@ -29,7 +29,7 @@ impl fmt::Display for ObjectPreview {
         let disp = if let Some(subtype) = &self.subtype {
             match subtype {
                 Subtype::Array => {
-                    let last_index = self.properties.len() - 1;
+                    let last_index = self.properties.len().saturating_sub(1);
                     let mut array = "".to_string();
                     for (index, property) in &mut self.properties.iter().enumerate() {
                         if index == 0 {
@@ -47,7 +47,7 @@ impl fmt::Display for ObjectPreview {
                 }
                 Subtype::Map => {
                     let map = if let Some(entries) = &self.entries {
-                        let last_index = entries.len() - 1;
+                        let last_index = entries.len().saturating_sub(1);
                         let mut map = "".to_string();
                         for (index, entry) in &mut entries.iter().enumerate() {
                             if index == 0 {
@@ -86,7 +86,7 @@ impl fmt::Display for ObjectPreview {
         } else {
             match &self.r#type {
                 Type::Object => {
-                    let last_index = self.properties.len() - 1;
+                    let last_index = self.properties.len().saturating_sub(1);
                     let mut object = "".to_string();
                     for (idx, property) in &mut self.properties.iter().enumerate() {
                         if idx == 0 {
